@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>特殊符号 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转义字符在LaTeX中有一些符号被用于特殊的用途，如 $\backslash$ 符号被用于命令的转义，直接在LaTeX中输入这些符号是无法正确得到这些符号的，甚至会引起LaTeX的报错。 在需要这些符号时，需要使用相应的命令来进行转义：    LaTeX命令 输出符号  LaTeX命令 输出符号     \# #  \$ $   \% %  \{ {   \} }  \~{} ~   \_{} _">
+<meta name="keywords" content="LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特殊符号">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/01/特殊符号/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="转义字符在LaTeX中有一些符号被用于特殊的用途，如 $\backslash$ 符号被用于命令的转义，直接在LaTeX中输入这些符号是无法正确得到这些符号的，甚至会引起LaTeX的报错。 在需要这些符号时，需要使用相应的命令来进行转义：    LaTeX命令 输出符号  LaTeX命令 输出符号     \# #  \$ $   \% %  \{ {   \} }  \~{} ~   \_{} _">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+<meta property="og:updated_time" content="2019-04-01T15:47:15.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="特殊符号">
+<meta name="twitter:description" content="转义字符在LaTeX中有一些符号被用于特殊的用途，如 $\backslash$ 符号被用于命令的转义，直接在LaTeX中输入这些符号是无法正确得到这些符号的，甚至会引起LaTeX的报错。 在需要这些符号时，需要使用相应的命令来进行转义：    LaTeX命令 输出符号  LaTeX命令 输出符号     \# #  \$ $   \% %  \{ {   \} }  \~{} ~   \_{} _">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">特殊符号</h2>
+  <p class="sub">Apr 1, 2019</p>
+  <article class="content">
+    <h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><p>在<code>LaTeX</code>中有一些符号被用于特殊的用途，如 $\backslash$ 符号被用于命令的转义，直接在<code>LaTeX</code>中输入这些符号是无法正确得到这些符号的，甚至会引起<code>LaTeX</code>的报错。</p>
+<p>在需要这些符号时，需要使用相应的命令来进行转义：</p>
+<table>
+<thead>
+<tr>
+<th><code>LaTeX</code>命令</th>
+<th>输出符号</th>
+<th></th>
+<th><code>LaTeX</code>命令</th>
+<th>输出符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\#</code></td>
+<td>#</td>
+<td></td>
+<td><code>\$</code></td>
+<td>$</td>
+</tr>
+<tr>
+<td><code>\%</code></td>
+<td>%</td>
+<td></td>
+<td><code>\{</code></td>
+<td>{</td>
+</tr>
+<tr>
+<td><code>\}</code></td>
+<td>}</td>
+<td></td>
+<td><code>\~{}</code></td>
+<td>~</td>
+</tr>
+<tr>
+<td><code>\_{}</code></td>
+<td>_</td>
+<td></td>
+<td><code>\^{}</code></td>
+<td>^</td>
+</tr>
+<tr>
+<td><code>\textbackslash</code></td>
+<td>\\</td>
+<td></td>
+<td><code>\&amp;</code></td>
+<td>&amp;</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><p><code>LaTeX</code>中的引号比较奇怪，如果只使用引号键（就是靠近回车那个键）来输入，不论输多少个，都只会解析出右引号，没有左边的。（单引号、双引号均是）</p>
+<p>要想输入左边的引号需要使用<strong>反引号</strong><code>`</code>，也就是主键盘<strong>左上角</strong>的那个键：</p>
+<table>
+<thead>
+<tr>
+<th><code>LaTeX</code>命令</th>
+<th>输出符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>`</code>(反引号)</td>
+<td>&lsquo;(左单引号)</td>
+</tr>
+<tr>
+<td><code>&#39;</code>(单引号)</td>
+<td>&rdquo;(左双引号)</td>
+</tr>
+<tr>
+<td><code>``</code>(两个反引号)</td>
+<td>&rsquo;(右单引号)</td>
+</tr>
+<tr>
+<td><code>&quot;</code>(双引号)</td>
+<td>&rdquo;(右双引号)</td>
+</tr>
+</tbody>
+</table>
+<p>另外，反引号被用来当作左引号，那么<strong>反引号本身</strong>又怎么输出呢？</p>
+<p>需要使用<code>\verb|`|</code>命令，显示结果为：`。</p>
+<hr>
+<h2 id="排版符号"><a href="#排版符号" class="headerlink" title="排版符号"></a>排版符号</h2><table>
+<thead>
+<tr>
+<th><code>LaTeX</code>命令</th>
+<th>输出符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\S</code></td>
+<td>&sect;</td>
+</tr>
+<tr>
+<td><code>\P</code></td>
+<td>&para;</td>
+</tr>
+<tr>
+<td><code>\copyright</code></td>
+<td>&copy;</td>
+</tr>
+<tr>
+<td><code>\pounds</code></td>
+<td>&pound;</td>
+</tr>
+<tr>
+<td><code>\dag</code></td>
+<td>$\dagger$</td>
+</tr>
+<tr>
+<td><code>\ddag</code></td>
+<td>$\ddagger$</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="数学模式中特殊符号"><a href="#数学模式中特殊符号" class="headerlink" title="数学模式中特殊符号"></a>数学模式中特殊符号</h2><table>
+<thead>
+<tr>
+<th><code>LaTeX</code>命令</th>
+<th>输出符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$\backslash$</code></td>
+<td>$\backslash$</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="LaTeX标志"><a href="#LaTeX标志" class="headerlink" title="LaTeX标志"></a><code>LaTeX</code>标志</h2><p>这个没法显示，上图：<br><img src="https://i.loli.net/2019/04/01/5ca22f73c2ca4.jpg" alt="LaTeX标志"></p>
+<hr>
+<h2 id="连字符（Hyphens）、连接号（En-dashes）、破折号（Em-dashes）、减号（Minus-signs）"><a href="#连字符（Hyphens）、连接号（En-dashes）、破折号（Em-dashes）、减号（Minus-signs）" class="headerlink" title="连字符（Hyphens）、连接号（En-dashes）、破折号（Em-dashes）、减号（Minus signs）"></a>连字符（Hyphens）、连接号（En-dashes）、破折号（Em-dashes）、减号（Minus signs）</h2><p>这四个符号非常的迷，因为它们区别不大，基本看不出来。</p>
+<p>当然，为了严谨，在这里还是说一下它们分别怎么输出：<br>连字符为<code>-</code>、连接号为<code>--</code>、破折号为<code>---</code>、减号为<code>$-$</code>。</p>
+<p>输出结果如下：<br><img src="https://i.loli.net/2019/04/01/5ca22f89e9cf4.jpg" alt="-"></p>
+<hr>
+<h2 id="其它符号"><a href="#其它符号" class="headerlink" title="其它符号"></a>其它符号</h2><p>没说的，上图（<code>HTML</code>无法表示）：<br><img src="https://i.loli.net/2019/04/01/5ca22f9e685aa.jpg" alt="其它"></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/05/AVL树/" class="link f-fl">⟵AVL树</a>
+    
+    
+      <a href="/2019/04/01/数学公式/" class="link f-fr">数学公式⟶</a>
+    
+  </footer>
+</section>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" },
+        extensions: ["AMSmath.js", "AMSsymbols.js"]
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

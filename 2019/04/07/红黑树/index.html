@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>红黑树 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="红黑树是一种自平衡的二叉搜索树，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。 但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。 与普通二叉搜索树的区别节点 颜色：相比于普通的二叉搜索树，红黑树的节点增加了一个颜色属性：黑色或红色，这也是红黑树名字的由来">
+<meta name="keywords" content="平衡树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/07/红黑树/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="红黑树是一种自平衡的二叉搜索树，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。 但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。 与普通二叉搜索树的区别节点 颜色：相比于普通的二叉搜索树，红黑树的节点增加了一个颜色属性：黑色或红色，这也是红黑树名字的由来">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9e319d75d0.png">
+<meta property="og:updated_time" content="2019-04-13T15:28:43.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="红黑树">
+<meta name="twitter:description" content="红黑树是一种自平衡的二叉搜索树，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。 但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。 与普通二叉搜索树的区别节点 颜色：相比于普通的二叉搜索树，红黑树的节点增加了一个颜色属性：黑色或红色，这也是红黑树名字的由来">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/07/5ca9e319d75d0.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">红黑树</h2>
+  <p class="sub">Apr 7, 2019</p>
+  <article class="content">
+    <p>红黑树是一种<strong>自平衡</strong>的<strong>二叉搜索树</strong>，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。</p>
+<p>但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。</p>
+<h2 id="与普通二叉搜索树的区别"><a href="#与普通二叉搜索树的区别" class="headerlink" title="与普通二叉搜索树的区别"></a>与普通二叉搜索树的区别</h2><h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><ul>
+<li><p><strong>颜色</strong>：相比于普通的二叉搜索树，红黑树的节点增加了一个<strong>颜色</strong>属性：<strong>黑色或红色</strong>，这也是红黑树名字的由来。</p>
+</li>
+<li><p><strong>叶子节点</strong>：红黑树特别区分了<strong>中间节点</strong>与<strong>叶子节点</strong>。在二叉搜索树中，叶子节点与中间节点一般不做区分，两者的区别仅在于有没有子节点（叶节点子节点为NULL，视为没有子节点）。虽然在红黑树中也可以这样，但是为了方便解释与实现，一般对叶子节点进行了区分：<strong>叶子节点不存储数据</strong>，只是充当树在此结束的标志。</p>
+</li>
+<li><p><strong>父指针</strong>：因为红黑树的特殊性，在进行平衡调整时，一般都会涉及到父节点与兄弟节点（具体请参见后文），所以在每个节点中都存储了指向其<strong>父节点的指针</strong>（叶子节点可能例外，参见后文）。</p>
+</li>
+</ul>
+<p>所以红黑树的节点定义如下：</p>
+<pre><code class="c">// 枚举节点颜色：只有黑色与红色
+enum COLOR { BLACK, RED };
+
+class Node {
+  public:
+    Node* parent; // 父节点
+    Node* left;   // 左子节点
+    Node* right;  // 右子节点
+    COLOR color;  // 节点颜色
+    int val;      // 节点的值
+};
+</code></pre>
+<h3 id="5条性质"><a href="#5条性质" class="headerlink" title="5条性质"></a>5条性质</h3><p>在普通二叉搜索树的基础上，红黑树的定义增加了以下5条性质：</p>
+<ol>
+<li>节点是黑色或者红色。（即树中任意节点<strong>非黑即红</strong>，没有其它颜色）</li>
+<li>根节点是黑色。</li>
+<li>所有的叶子节点是黑色。</li>
+<li>每个红色节点一定有两个黑色的节点。（即有父子关系的两个节点不能均为红色）</li>
+<li>从任一节点出发，到其每个叶子节点的所有简单路径上有相同数量的黑节点。（这个黑节点数量也被称为<strong>黑高</strong>）</li>
+</ol>
+<p>基于这5个性质，红黑树能够保证<strong>从根节点到叶子节点最长深度不会超过最短深度的2倍</strong>，从而保证了红黑树的平衡。</p>
+<p>因为最长路径即为红黑交替出现，而最短路径即为全部为黑节点。又由于性质5，所以这两条路径上的黑色节点数目一定相同，根节点与叶节点均为黑色，最长路径上多出的红色节点数目一定不会多于黑色节点的数目。</p>
+<p>也正因为红黑树平衡性是通过黑高来进行维护的，所以在其节点上不用存储树的高度。</p>
+<h3 id="树的结构"><a href="#树的结构" class="headerlink" title="树的结构"></a>树的结构</h3><p>一般情况下，红黑树有以下三种结构（参考《算法导论》）：</p>
+<ul>
+<li><p>所有叶子节点为NULL，在其它节点上存储<strong>节点的黑高</strong>。如图：<br><img src="https://i.loli.net/2019/04/11/5caf1af88a60a.png" alt="NULL.png"></p>
+</li>
+<li><p>叶子节点由一个节点实例来代表，并且根节点的父节点也指向此节点，如图：<br><img src="https://i.loli.net/2019/04/07/5ca9e319d75d0.png" alt="Tril.png"></p>
+</li>
+<li><p>每个分支都有一个单独的叶节点实例，如图：<br><img src="https://i.loli.net/2019/04/11/5caf1bdc7c28b.png" alt="leaf.png"></p>
+</li>
+</ul>
+<p>本文选取<strong>第二种结构</strong>。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>对于二叉搜索树的操作基本上也就是三种：<strong>增加</strong>、<strong>删除</strong>、<strong>查找</strong>。</p>
+<p>红黑树上也是一样，其中<strong>查找操作与普通的二叉搜索树上相同</strong>，此处便不再赘述。下文主要以最麻烦的插入与删除来进行说明。</p>
+<p>在此之前，先说明一下文中代码所用的红黑树结构（这里只说明了类中的数据，函数声明与定义请参见文末源码）：</p>
+<pre><code class="c++">class RedBlackTree {
+  private:
+    // 枚举节点颜色：只有黑色与红色
+    enum COLOR { BLACK, RED };
+
+    class Node {
+      public:
+        Node* parent; // 父节点
+        Node* left;   // 左子节点
+        Node* right;  // 右子节点
+        COLOR color;  // 节点颜色
+        int val;      // 节点的值
+    };
+
+    // 叶节点，只有一个实例，其中的值没有意义（默认为0）、其父、左子、右子节点均为nullptr
+    Node* leaf;
+    // 树的根节点，通过此指针可以得到整颗树
+    Node* root;
+    // 双黑节点的父节点，只有在删除操作后进行双黑修正时值才有意义，其余情况下均为nullptr
+    Node* dBlackParent;
+}
+</code></pre>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>先从较为简单的插入操作说起。</p>
+<p>总的来说，分为三步：</p>
+<ul>
+<li><strong>找到</strong>应该插入到树中的哪个<strong>位置</strong>。</li>
+<li>创建新的<strong>红色</strong>节点并将其<strong>插入</strong>到树中。</li>
+<li>对树进行<strong>调整（包括染色与旋转）</strong>，使其满足红黑树的定义（5条性质）。</li>
+</ul>
+<p>红黑树本质上也是一颗二叉搜索树，所以它的插入操作与二叉搜索树一样：<strong>先找到应该插入的位置，然后插入</strong>。这一部分不必多说。</p>
+<p><strong>不同的是</strong>，因为红黑树增加了5条性质，在插入后有可能会违反其中一条或几条性质，所以在红黑树上的插入操作多了一步调整。</p>
+<p>首先，如果一颗红黑树不为空时，那么<strong>性质1、2、3则会自然满足</strong>，不用去多加考虑。所以我们只需要保证<strong>性质4与性质5</strong>便可。</p>
+<p><strong>为什么要默认插入红色节点呢？</strong></p>
+<p><strong>因为性质5更为复杂</strong>（因为只要有某一节点不满足，那么其父节点也不满足，从此节点向上到根节点，路径上的所有节点都会不满足），如果破坏了性质5，再进行恢复所付出的代价也会更大，所以我们在插入时尽量<strong>先保证性质5不会被破坏</strong>。因此，在进行插入时，我们将新的节点<strong>默认为红色</strong>。这样，不论此节点被插入到何处，都不会破坏性质5（性质5只与黑色节点有关）。</p>
+<h3 id="5种情况"><a href="#5种情况" class="headerlink" title="5种情况"></a>5种情况</h3><p>默认为红色的新节点插入到树中后，会出现下面<strong>5种情况</strong>（为方便讨论，在此假设<strong>当前讨论节点为N</strong>（在插入后第一次讨论时，<strong>N代表新插入的节点</strong>）、N的<strong>父节点为P</strong>、P的<strong>兄弟节点为U</strong>、N的<strong>祖父节点为G</strong>（即<strong>P的父节点</strong>））：</p>
+<h3 id="情形1：N就是根节点。"><a href="#情形1：N就是根节点。" class="headerlink" title="情形1：N就是根节点。"></a>情形1：N就是根节点。</h3><p>这时我们只需要将此节点<strong>重绘为黑色即可</strong>。这样，树上的所有节点的黑高都增加了1，性质5得到满足。</p>
+<pre><code class="c++">void RedBlackTree::InsertCase1(Node* root) {
+    // 树为空，直接返回
+    if (!root) return;
+    // 当前节点为根节点，染黑当前节点并返回
+    if (root-&gt;parent == leaf) {
+        root-&gt;color = BLACK;
+        return;
+    }
+    // 否则进入情形2判断
+    InsertCase2(root);
+}
+</code></pre>
+<h3 id="情形2：P为黑色。"><a href="#情形2：P为黑色。" class="headerlink" title="情形2：P为黑色。"></a>情形2：P为黑色。</h3><p>此时性质4没有被破坏，性质5因为插入的是红色节点，也未被破坏。所以此种情况<strong>不用调整</strong>。</p>
+<pre><code class="c++">void RedBlackTree::InsertCase2(Node* root) {
+    if (root-&gt;parent-&gt;color == BLACK) return;
+    // 否则进入情形3判断
+    else
+        InsertCase3(root);
+}
+</code></pre>
+<p><strong>一个说明</strong>：<strong>图中三角表示子树，k表示此子树的黑高为k</strong>。</p>
+<h3 id="情形3：P为红色，B为红色。"><a href="#情形3：P为红色，B为红色。" class="headerlink" title="情形3：P为红色，B为红色。"></a>情形3：P为红色，B为红色。</h3><p>我们假设N为P的左子节点，右子节点对称，不进行展开说明，只需要将左右对换即可。</p>
+<p>此时我们可以简单地<strong>将G重绘为红色，将P与B重绘为黑色</strong>。如图：</p>
+<p><img src="https://i.loli.net/2019/04/13/5cb1539f00e56.png" alt="情形3"></p>
+<p>此操作只是将G节点的黑色属性下放到了P与B节点，所以此操作<strong>不会破坏性质5</strong>。并且，此时在以G为根的子树中，性质4也得到了满足。但是此时，有可能<strong>G为根节点</strong>（违反性质2）或者<strong>G的父节点为红色</strong>（违反性质4），所以我们需要从<strong>情形1</strong>开始，对G进行调整讨论。</p>
+<pre><code class="c++">void RedBlackTree::InsertCase3(Node* root) {
+    // 父节点
+    Node* p = root-&gt;parent;
+    // 祖父节点
+    Node* g = p-&gt;parent;
+    // 叔父节点
+    // 如果父节点为祖父节点的左子节点，那么叔父节点就应为祖父节点的右子节点，反之亦然
+    Node* u = g-&gt;left == p ? g-&gt;right : g-&gt;left;
+
+    // 如果叔父节点为红色（如果叔父节点为叶节点，则不可能为红色）
+    if (u-&gt;color == RED) {
+        // 重绘祖父节点为红色
+        g-&gt;color = RED;
+        // 重绘父节点、叔父节点为黑色
+        p-&gt;color = BLACK;
+        u-&gt;color = BLACK;
+
+        // 进行祖父节点的调整
+        InsertCase1(g);
+    }
+    // 进入情形4判断
+    else
+        InsertCase4(root);
+}
+</code></pre>
+<p><strong>又一个说明</strong>：在<strong>情形4和情形5</strong>中，我们假设<strong>P为G的左子节点</strong>。如果不是，那么进行左右对调即可。</p>
+<h3 id="情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。"><a href="#情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。" class="headerlink" title="情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。"></a>情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。</h3><p><strong>祖父 - 父 - 当前</strong>三者呈“<strong>拆线</strong>”型。</p>
+<p>这种情况下，我们通过<strong>对P</strong>进行一次<strong>左旋转</strong>，<strong>转化为情形5</strong>进行处理。如图：</p>
+<p><img src="https://i.loli.net/2019/04/13/5cb19631aa166.png" alt="情形4"></p>
+<p>经过旋转之后，<strong>G的左子树</strong>（即原来以P为根的子树，现在以N为根的子树）<strong>没有增加新的黑色节点</strong>，也就是说，性质5仍然是满足的，只是现在的N和P仍不满足性质4。</p>
+<pre><code class="c++">void RedBlackTree::InsertCase4(Node* root) {
+    // 父节点
+    Node* p = root-&gt;parent;
+    // 祖父节点
+    Node* g = p-&gt;parent;
+    // 叔父节点
+    // 如果父节点为祖父节点的左子节点，那么叔父节点就应为祖父节点的右子节点，反之亦然
+    Node* u = g-&gt;left == p ? g-&gt;right : g-&gt;left;
+
+    if (p-&gt;right == root &amp;&amp; g-&gt;left == p) {
+        RotateL(p);
+        InsertCase5(root-&gt;left);
+    } else if (p-&gt;left == root &amp;&amp; g-&gt;right == p) {
+        RotateR(p);
+        InsertCase5(root-&gt;right);
+    } else
+        InsertCase5(root);
+}
+</code></pre>
+<h3 id="情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。"><a href="#情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。" class="headerlink" title="情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。"></a>情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。</h3><p><strong>祖父 - 父 - 当前</strong>三者呈“<strong>直线</strong>”型。</p>
+<p>此时我们<strong>对G</strong>进行<strong>右旋转</strong>，并<strong>交换P与G的颜色</strong>（将<strong>G染红、P染黑</strong>）。如图：<br><img src="https://i.loli.net/2019/04/13/5cb19ab4643e3.png" alt="情形5"></p>
+<p>此时，对于经过G的所有路径，现在仍通过一个黑色的节点：P，黑高不变；经过B的所有路径，虽然多经过了G节点，但是G现在为红色，所以黑高也没有发生变化。<strong>所以在这个子树上，所有节点的黑高都没有发生变化，都满足性质5</strong>，同时调整之后，也满足性质4。调整完成。</p>
+<pre><code class="c++">void RedBlackTree::InsertCase5(Node* root) {
+    // 父节点
+    Node* p = root-&gt;parent;
+    // 祖父节点
+    Node* g = p-&gt;parent;
+    // 叔父节点
+    // 如果父节点为祖父节点的左子节点，那么叔父节点就应为祖父节点的右子节点，反之亦然
+    Node* u = g-&gt;left == p ? g-&gt;right : g-&gt;left;
+
+    if (p-&gt;left == root &amp;&amp; g-&gt;left == p)
+        RotateR(g);
+    else
+        RotateL(g);
+    g-&gt;color = RED;
+    p-&gt;color = BLACK;
+}
+</code></pre>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>删除操作也分为四步：</p>
+<ul>
+<li>在树中找到待删除元素。</li>
+<li>如果待删除元素有两个子节点，找到其<strong>前驱节点</strong>，并<strong>交换两个节点的值</strong>，将前驱节点标记为真正要删除的节点。</li>
+<li>删除节点。</li>
+<li><strong>“双黑”修正</strong>。</li>
+</ul>
+<p>前面三步与普通的二叉搜索树相同，将删除问题转化成了删除<strong>最多只有一个子节点</strong>的情况。所以下面的讨论也基于被删除的节点最多只有一个子节点。</p>
+<p>所不同的在于最后一步：<strong>“双黑”修正</strong>。这也是删除操作（甚至是红黑树中）最为复杂的一步。</p>
+<p><strong>注</strong>：在下面的讨论中，节点没有子节点意为节点的左、右子节点均指向唯一的叶节点。</p>
+<h3 id="删除节点的三种情况"><a href="#删除节点的三种情况" class="headerlink" title="删除节点的三种情况"></a>删除节点的三种情况</h3><p>为方便讨论，我们假设<strong>被删除的节点为T</strong>、<strong>当前讨论的节点为N</strong>（第一次讨论时，N为被删除节点的子节点）、<strong>X的父节点为P</strong>、<strong>X的兄弟节点为B</strong>、<strong>B的左子节点为</strong>$\mathrm{B_L}$、<strong>B的右子节点为</strong>$\mathrm{B_R}$。</p>
+<ul>
+<li><p>T为<strong>红色</strong>。此时，T一定<strong>没有子节点</strong>。根据性质4，如果T有一个子节点N，那么N一定是黑色，则此时经过N的黑高一定大于1，不经过此子节点的黑高为1，违反性质5。</p>
+<p>这种情况下，<strong>直接删除即可</strong>，<strong>用叶节点做为P的子节点</strong>。</p>
+</li>
+<li><p>T为<strong>黑色</strong>，但<strong>有一个红色子节点N</strong>。此时，<strong>N一定没有子节点</strong>。如上一种情况，要保证经过N的黑高为1，那么它就不能有子节点。</p>
+<p>这种情况下，<strong>直接删除</strong>，用<strong>N做为P的子节点</strong>，并将<strong>N染成黑色</strong>。这样，原来经过P的路径的黑高为2，现在删除了一个黑色节点（X），又增加了一个黑色节点（染色后的N），经过现在N的路径的黑高仍为2，黑高没有变化。</p>
+</li>
+<li><p>T为<strong>黑色</strong>，且其<strong>没有红色子节点</strong>。那么此时，<strong>T一定没有子节点</strong>，因为如果N为黑色，那么经过N的路径与不经过N的路径（黑高为1）黑高不等，违反性质5。</p>
+<p>这种情况下，如果将T直接删除，那么则会原来经过T的路径的黑高也就会减少1，破坏性质5，需要进行调整。这就是所谓的<strong>“双黑”修正</strong>。</p>
+</li>
+</ul>
+<h3 id="“双黑”修正"><a href="#“双黑”修正" class="headerlink" title="“双黑”修正"></a>“双黑”修正</h3><p>什么是“双黑”呢，顾名思义，就是有两个黑色：<strong>一个节点被染上了两个黑色</strong>。</p>
+<p>这样做的目的其实是为了简化讨论，如上面所说，T为黑色且没有子节点的时候，删除T会导致经过T的路径上的黑高减少1，那么我们就给P<strong>增加一个黑色子节点</strong>（因为P此时应该指向叶节点，这个子节点就是叶节点），但是又不能破坏原来的结构，所有可以假设在这个黑色子节点上有两个黑色，这样黑高就满足性质5了。这就是“双黑”。</p>
+<p>而修正就比较好理解了，因为真实情况下一个节点不可能有两个黑色（那样就太非了(￣▽￣)”），所以我们要对树进行调整，去掉这个“双黑”节点。</p>
+<p>具体去除方法有<strong>6种情况</strong>。</p>
+<p>在此这前，先做一些说明：</p>
+<ul>
+<li>节点假设与上一节相同，只是现在X已经被删除，<strong>N代替了X现在的位置</strong>，相应的，B成了N的兄弟节点，P成了N的父节点，当前讨论的节点N就是要进行修正的“双黑”节点。</li>
+<li>另外，假设<strong>N为P的左子节点</strong>。如果不是，则在相应的情形（2、5、6）下进行左右对调。</li>
+<li>与插入类似，“双黑”修正时也会进行回溯，所以在讨论时会以<strong>一般情况</strong>进行讨论。</li>
+<li>关于N的子树，如果在第一次讨论时，N本身即为叶子节点，所以N的子树是不存在的，图片中所画为一般情况。同样的，对于B的子树也是类似的。</li>
+<li>因为在进行调整时，会去取N的父节点P，但如果N为叶子节点，那么其父节点是被设置为<code>nullptr</code>的，所以为了便于讨论，在树的结构中存储了<strong>N的父节点</strong>：<code>dBlackParent</code>，并且在讨论时进行更新维护。</li>
+</ul>
+<h3 id="“双黑”修正的思路"><a href="#“双黑”修正的思路" class="headerlink" title="“双黑”修正的思路"></a>“双黑”修正的思路</h3><p>怎么去除“双黑”节点呢？</p>
+<p>最容易想到的办法就是<strong>把B给染红</strong>。这样，对于P而言，左子树上去除了一个黑色节点，右子树上也去掉了一个黑色节点，这样“双黑”就在以P为根的子树上去除了，然后向上传递，再讨论P…</p>
+<p>但问题就在于，B不是说染红就染的。<strong>万一它就是红的呢？万一P是红的呢？万一B的子节点有红的呢？</strong></p>
+<p>我们的目标就是要将B转化为可以染红。</p>
+<h3 id="情形1：N为树的根"><a href="#情形1：N为树的根" class="headerlink" title="情形1：N为树的根"></a>情形1：N为树的根</h3><p>如果是<strong>第一次讨论</strong>时，N为叶子节点，则代表删除的节点X是原来树的根，删除之后树为空。</p>
+<p>如果是<strong>回溯的讨论</strong>，那么“双黑”性质传递到了根节点，则无需更改就可以消除“双黑”。此时相当于所有路径都去除了一个黑色节点，所有节点的黑高都减少1，满足性质5。</p>
+<pre><code class="c++">// 删除节点为根节点
+if (t == root) {
+    // 删除根节点
+    delete root;
+    // 根节点置空，便于再进行插入
+    root = nullptr;
+    return 1;
+}
+</code></pre>
+<pre><code class="c++">void RedBlackTree::RemoveCase1(Node* root) {
+    // 双黑节点为新的根节点，直接返回
+    if (dBlackParent == leaf) return;
+    // 否则进入情形2的判断
+    RemoveCase2(root);
+}
+</code></pre>
+<h3 id="情形2：B为红色"><a href="#情形2：B为红色" class="headerlink" title="情形2：B为红色"></a>情形2：B为红色</h3><p>此时，<strong>P为黑色</strong>，$\mathrm{B_L}$、$\mathrm{B_R}$<strong>均为黑色</strong>。</p>
+<p>我们<strong>对P进行左旋转</strong>，然后<strong>交换P和B的颜色</strong>。如图：<br><img src="https://i.loli.net/2019/04/13/5cb1ed7bd557e.png" alt="双黑情形2"></p>
+<p>虽然我们现在没有直接解决“双黑”的问题，但是通过此次旋转与染色，现在N有了一个<strong>红色的父节点</strong>与一个<strong>黑色的兄弟节点</strong>，此时“双黑”节点仍为N，进行<strong>情形4</strong>的判断。</p>
+<pre><code class="c++">void RedBlackTree::RemoveCase2(Node* root) {
+    // 兄弟节点
+    Node* b =
+        dBlackParent-&gt;left == root ? dBlackParent-&gt;right : dBlackParent-&gt;left;
+
+    // 情形2处理的情况
+    if (b-&gt;color == RED) {
+        b-&gt;color = BLACK;
+        // 将父节点重绘为红色
+        dBlackParent-&gt;color = RED;
+        // 以父节点为根旋转
+        if (dBlackParent-&gt;left == root)
+            RotateL(dBlackParent);
+        else
+            RotateR(dBlackParent);
+        // 进入情形4的判断
+        RemoveCase4(root);
+    }
+    // 不是情形2进入情形3的判断
+    else
+        RemoveCase3(root);
+}
+</code></pre>
+<h3 id="情形3：P、S、-mathrm-B-L-、-mathrm-B-R-均为黑色"><a href="#情形3：P、S、-mathrm-B-L-、-mathrm-B-R-均为黑色" class="headerlink" title="情形3：P、S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色"></a>情形3：P、S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色</h3><p>此时，就可以直接<strong>将B染红</strong>。</p>
+<p>在以P为根的子树内，“双黑”成功去除。但是这样操作后，通过P的路径上的节点比不通过P的路径上的节点的黑高都少1，也就是说，现在<strong>“双黑”性质转移到了P</strong>，我们再<strong>对P从情形1开始讨论</strong>。如图：<br><img src="https://i.loli.net/2019/04/13/5cb1f65345604.png" alt="删除情形3"></p>
+<pre><code class="c++">void RedBlackTree::RemoveCase3(Node* root) {
+    // 兄弟节点
+    Node* b =
+        dBlackParent-&gt;left == root ? dBlackParent-&gt;right : dBlackParent-&gt;left;
+
+    // 情形3处理的情况
+    if (dBlackParent-&gt;color == BLACK &amp;&amp; b-&gt;color == BLACK &amp;&amp;
+        b-&gt;left-&gt;color == BLACK &amp;&amp; b-&gt;right-&gt;color == BLACK) {
+        // 重绘兄弟节点为红色
+        b-&gt;color = RED;
+        // 双黑向上传递
+        root = dBlackParent;
+        dBlackParent = dBlackParent-&gt;parent;
+        // 从情形1开始判断父节点
+        RemoveCase1(root);
+    }
+    // 不是情形3进入情形4的判断
+    else
+        RemoveCase4(root);
+}
+</code></pre>
+<h3 id="情形4：P为红色，S、-mathrm-B-L-、-mathrm-B-R-均为黑色"><a href="#情形4：P为红色，S、-mathrm-B-L-、-mathrm-B-R-均为黑色" class="headerlink" title="情形4：P为红色，S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色"></a>情形4：P为红色，S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色</h3><p>此时，<strong>先染黑P，再染红B</strong>。</p>
+<p>这样，我们就将N上两份黑色分了一份给P，所以经过N的路径的节点的黑高保持了不变。</p>
+<p>并且，我们达到了目标，可以<strong>直接将B染红</strong>。染红B后，经过B的路径的节点的黑高都减少了1（因为P染黑又增加了1，所以与原来相同）。如图：<br><img src="https://i.loli.net/2019/04/13/5cb1f60b02358.png" alt="删除情形4"></p>
+<pre><code class="c++">void RedBlackTree::RemoveCase4(Node* root) {
+    // 兄弟节点
+    Node* b =
+        dBlackParent-&gt;left == root ? dBlackParent-&gt;right : dBlackParent-&gt;left;
+
+    if (dBlackParent-&gt;color == RED &amp;&amp; b-&gt;color == BLACK &amp;&amp;
+        b-&gt;left-&gt;color == BLACK &amp;&amp; b-&gt;right-&gt;color == BLACK) {
+        // 交换兄弟节点和父节点的颜色
+        b-&gt;color = RED;
+        dBlackParent-&gt;color = BLACK;
+    }
+    // 不是情形4进入情形5的判断
+    else
+        RemoveCase5(root);
+}
+</code></pre>
+<h3 id="情形5：B为黑色，-mathrm-B-L-为红色、-mathrm-B-R-为黑色"><a href="#情形5：B为黑色，-mathrm-B-L-为红色、-mathrm-B-R-为黑色" class="headerlink" title="情形5：B为黑色，$\mathrm{B_L}$为红色、$\mathrm{B_R}$为黑色"></a>情形5：B为黑色，$\mathrm{B_L}$为红色、$\mathrm{B_R}$为黑色</h3><p>此时，我们对B进行<strong>右旋转</strong>，再<strong>交换</strong>$\mathrm{B_L}$<strong>与B的颜色</strong>。转化为<strong>情形6</strong>。</p>
+<p>此操作不会对N与P产生影响，但是现在N的兄弟节点为黑色，并且它有一个<strong>红色的右子节点</strong>。</p>
+<p>并且此次操作对于原来经过B的路径的节点的黑高没有变化。如图：</p>
+<p><img src="https://i.loli.net/2019/04/13/5cb1fbd4d3d84.png" alt="删除情形5"></p>
+<pre><code class="c++">void RedBlackTree::RemoveCase5(Node* root) {
+    // 兄弟节点
+    Node* b =
+        dBlackParent-&gt;left == root ? dBlackParent-&gt;right : dBlackParent-&gt;left;
+
+    // 当前节点为父节点的左子节点、兄弟节点为黑色、兄弟节点的左子节点为红色、兄弟节点的右子节点为黑色
+    if (dBlackParent-&gt;left == root &amp;&amp; b-&gt;left-&gt;color == RED &amp;&amp;
+        b-&gt;right-&gt;color == BLACK) {
+        RotateR(b);
+    }
+    // 与上类似，只是左右对调
+    else if (dBlackParent-&gt;right == root &amp;&amp; b-&gt;right-&gt;color == RED &amp;&amp;
+             b-&gt;left-&gt;color == BLACK) {
+        RotateL(b);
+    }
+
+    // 进入情形6的处理
+    RemoveCase6(root);
+}
+</code></pre>
+<h3 id="情形6：S为黑色、-mathrm-B-R-为黑色"><a href="#情形6：S为黑色、-mathrm-B-R-为黑色" class="headerlink" title="情形6：S为黑色、$\mathrm{B_R}$为黑色"></a>情形6：S为黑色、$\mathrm{B_R}$为黑色</h3><p>此时，对<strong>P进行左旋转</strong>，然后<strong>交换P和B的颜色并染黑</strong>$\mathrm{B_R}$。</p>
+<p>如图：<br><img src="https://i.loli.net/2019/04/13/5cb1fde2289bd.png" alt="删除情形6"></p>
+<p>此时会有两种情况：</p>
+<ul>
+<li><strong>P为黑色时</strong>：操作后的B应为红色，那么从P到叶子节点的黑高为<code>k + 2</code>，操作之后仍为<code>k + 2</code>。</li>
+<li><strong>P为红色时</strong>：操作后的B应为黑色，那么从P到叶子节点的黑高为<code>k + 2</code>，操作之后仍为<code>k + 2</code>。</li>
+</ul>
+<p>并且从图中可以看出，并没有违反性质4，所以“双黑”节点消失。修正完成。</p>
+<h2 id="附注"><a href="#附注" class="headerlink" title="附注"></a>附注</h2><ul>
+<li>文中完整源代码请参见我的<code>Github</code>：<a href="https://github.com/anscor/BlogCode/tree/master/RedBlackTree" target="_blank" rel="noopener">RedBlackTree</a>。</li>
+</ul>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91</a></li>
+<li><a href="https://www.bilibili.com/video/av45909616" target="_blank" rel="noopener">https://www.bilibili.com/video/av45909616</a></li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2019/04/05/AVL树/" class="link f-fr">AVL树⟶</a>
+    
+  </footer>
+</section>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" },
+        extensions: ["AMSmath.js", "AMSsymbols.js"]
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

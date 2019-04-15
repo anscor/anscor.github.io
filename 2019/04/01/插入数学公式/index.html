@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>插入数学公式 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="分类LaTeX中数学公式的呈现可分为两类：行内公式与行间公式。  行内公式： 又被称为内联公式(text)，即在声明文本的正文之内，也就是说是嵌入文字之间的，与文字在同一行。  行间公式： 又被称为外联公式(displayed)，即与正文分开的公式，公式单独占据一行。    实现这两种公式均有三种方式来实现。  行内公式：  使用$...$方式将公式包含在其中。 使用\(...\)将公式包含在其中">
+<meta name="keywords" content="LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插入数学公式">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/01/插入数学公式/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="分类LaTeX中数学公式的呈现可分为两类：行内公式与行间公式。  行内公式： 又被称为内联公式(text)，即在声明文本的正文之内，也就是说是嵌入文字之间的，与文字在同一行。  行间公式： 又被称为外联公式(displayed)，即与正文分开的公式，公式单独占据一行。    实现这两种公式均有三种方式来实现。  行内公式：  使用$...$方式将公式包含在其中。 使用\(...\)将公式包含在其中">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+<meta property="og:updated_time" content="2019-04-01T08:28:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插入数学公式">
+<meta name="twitter:description" content="分类LaTeX中数学公式的呈现可分为两类：行内公式与行间公式。  行内公式： 又被称为内联公式(text)，即在声明文本的正文之内，也就是说是嵌入文字之间的，与文字在同一行。  行间公式： 又被称为外联公式(displayed)，即与正文分开的公式，公式单独占据一行。    实现这两种公式均有三种方式来实现。  行内公式：  使用$...$方式将公式包含在其中。 使用\(...\)将公式包含在其中">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">插入数学公式</h2>
+  <p class="sub">Apr 1, 2019</p>
+  <article class="content">
+    <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><code>LaTeX</code>中数学公式的呈现可分为两类：<strong>行内公式</strong>与<strong>行间公式</strong>。</p>
+<ul>
+<li><p><strong>行内公式</strong>： 又被称为<strong>内联公式</strong>(text)，即在声明文本的正文之内，也就是说是嵌入文字之间的，与文字在同一行。</p>
+</li>
+<li><p><strong>行间公式</strong>： 又被称为<strong>外联公式</strong>(displayed)，即与正文分开的公式，公式单独占据一行。</p>
+</li>
+</ul>
+<hr>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>这两种公式均有三种方式来实现。</p>
+<ul>
+<li><p><strong>行内公式</strong>：</p>
+<ol>
+<li>使用<code>$...$</code>方式将公式包含在其中。</li>
+<li>使用<code>\(...\)</code>将公式包含在其中。</li>
+<li>使用<code>\begin {math}</code>和<code>\end {math}</code>将公式包含在其中。</li>
+</ol>
+</li>
+<li><p><strong>行间公式</strong>：</p>
+<ol>
+<li>使用<code>$$...$$</code>方式将公式包含在其中。</li>
+<li>使用<code>\[...\]</code>将公式包含在其中。</li>
+<li>使用<code>\begin {digplaymath}</code>与<code>\end {displaymath}</code>将公式包含在其中。</li>
+</ol>
+</li>
+</ul>
+<p>下例中以不同的方式进行了<code>x + y = 10</code>这个公式的实现：</p>
+<pre><code class="LaTeX">%!TEX program = xelatex
+
+\documentclass{article}
+    \begin{document}
+        test test test $x + y = 10$ test test test
+
+        test test test \(x + y = 10\) test test test
+
+        test test test
+        \begin{math}
+            x + y = 10
+        \end{math}
+        test test test
+
+
+        test test test $$x + y = 10$$ test test test
+
+        test test test \[x + y = 10\] test test test
+
+        test test test
+        \begin{displaymath}
+            x + y = 10
+        \end{displaymath}
+        test test test
+
+    \end{document}
+</code></pre>
+<p>结果如下：<br><img src="https://i.loli.net/2019/04/01/5ca1cba3f1c75.png" alt="不同方式插入数学公式"></p>
+<hr>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><p><code>LaTeX</code>中会将换行符忽略，若要实现在文档中换行，需在要换行处添加<strong>空行</strong>。这样在实现的文档中会另起一段，且若是默认情况下，在每一段开始，<code>LaTeX</code>在处理时会自动添加4个字符的缩进。这里仅讨论关于在文档中添加数学公式的方法，对于换行等格式的控制暂不展开说明。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/01/各种数学符号/" class="link f-fl">⟵各种数学符号</a>
+    
+    
+      <a href="/2019/04/01/LaTeX文档基本结构/" class="link f-fr">LaTeX文档基本结构⟶</a>
+    
+  </footer>
+</section>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

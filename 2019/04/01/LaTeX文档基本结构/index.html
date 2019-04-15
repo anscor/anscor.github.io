@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>LaTeX文档基本结构 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="LaTeX是一种基于TeX的排版系统。作为一种标记语言，其在语法结构上与HTML非常相似。 下面是一个LaTeX最基本的结构： \documentclass[options]{class} % 这是前言 \begin{document}     % 这是正文 \end{document}  文档类型说明上例中第一行所示(\documentclass[options]{class})。此语句一般位于">
+<meta name="keywords" content="LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX文档基本结构">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/01/LaTeX文档基本结构/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="LaTeX是一种基于TeX的排版系统。作为一种标记语言，其在语法结构上与HTML非常相似。 下面是一个LaTeX最基本的结构： \documentclass[options]{class} % 这是前言 \begin{document}     % 这是正文 \end{document}  文档类型说明上例中第一行所示(\documentclass[options]{class})。此语句一般位于">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+<meta property="og:updated_time" content="2019-04-01T05:16:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LaTeX文档基本结构">
+<meta name="twitter:description" content="LaTeX是一种基于TeX的排版系统。作为一种标记语言，其在语法结构上与HTML非常相似。 下面是一个LaTeX最基本的结构： \documentclass[options]{class} % 这是前言 \begin{document}     % 这是正文 \end{document}  文档类型说明上例中第一行所示(\documentclass[options]{class})。此语句一般位于">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">LaTeX文档基本结构</h2>
+  <p class="sub">Apr 1, 2019</p>
+  <article class="content">
+    <p><code>LaTeX</code>是一种基于<code>TeX</code>的排版系统。作为一种标记语言，其在语法结构上与<code>HTML</code>非常相似。</p>
+<p>下面是一个<code>LaTeX</code>最基本的结构：</p>
+<pre><code class="LaTeX">\documentclass[options]{class}
+% 这是前言
+\begin{document}
+    % 这是正文
+\end{document}
+</code></pre>
+<h2 id="文档类型说明"><a href="#文档类型说明" class="headerlink" title="文档类型说明"></a>文档类型说明</h2><p>上例中第一行所示(<code>\documentclass[options]{class}</code>)。此语句一般位于第一行，用于说明文档类型等信息。</p>
+<ul>
+<li><code>options</code>参数： <strong>选项参数</strong>(options parameter)。些参数为<strong>可选</strong>参数，主要用于定义文档的<strong>主字体大小</strong>、<strong>文档排版</strong>、<strong>文档纸张</strong>等信息。可添加多个参数，参数之间使用逗号(,)隔开。如： <code>\documentclass[12pt, a4paper]{article}</code>表示文档主字体大小为<code>12pt</code>，纸张为<code>A4</code>纸。</li>
+<li><code>class</code>参数： <strong>文档类型</strong>。用以定义文档的类型，主要包括<code>article</code>，<code>report</code>，<code>letter</code>，<code>book</code>等类型。</li>
+</ul>
+<hr>
+<h2 id="前言-preamble-部分"><a href="#前言-preamble-部分" class="headerlink" title="前言(preamble)部分"></a>前言(preamble)部分</h2><p>位于<code>\documentclass[options]{class}</code>与<code>\begin {document}</code>之间，主要用于添加宏包(使用<code>\usepackage</code>语句)、预定义标题(title)、目录等信息。</p>
+<hr>
+<h2 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a>正文部分</h2><p>此部分被包含于<code>\begin {document}</code>与<code>\end {document}</code>之间，为文档的主体内容。在其中，可以使用<code>\begin {name}</code>、<code>\end {name}</code>语句的<strong>组合</strong>与<strong>嵌套</strong>来组织文档内容。</p>
+<hr>
+<h2 id="注释部分"><a href="#注释部分" class="headerlink" title="注释部分"></a>注释部分</h2><ul>
+<li><strong>单行注释</strong>： 在<code>LaTeX</code>中，使用<code>%</code>进行单行注释，同一行中<code>%</code>后的内容会被忽略。</li>
+<li><strong>多行注释</strong>： 在<code>LaTeX</code>中多行注释有两种方式：<ul>
+<li>使用<code>\begin {comment}</code>与<code>\end {comment}</code>将所要注释的内容包含。但此方法需在前言区添加<code>verbatim</code>宏包，即<code>\usepackage{verbatim}</code>。</li>
+<li>使用<code>\iffalse</code>与<code>\fi</code>将所要注释的内容包含。</li>
+</ul>
+</li>
+</ul>
+<p>下面是一个<code>LaTeX</code>中注释的例子：</p>
+<pre><code class="LaTeX">\documentclass{article}
+    \usepackage{verbatim} % 使用comment
+    \begin{document}
+        comment 1
+        % comment 2
+        % comment 3
+        \begin{comment}
+            comment 4
+            comment 5
+        \end{comment}
+        \iffalse
+            comment 6
+            comment 7
+        \fi
+    \end{document}
+</code></pre>
+<p>编译导出<code>pdf</code>文件后结果如下：</p>
+<p><img src="https://i.loli.net/2019/04/01/5ca19bdc0ae8d.png" alt="注释"></p>
+<p>可以看出，从<code>commment 1</code>到<code>comment 7</code>这几个测试语句，只有<code>comment 1</code>正常输出，其余均被注释。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/01/插入数学公式/" class="link f-fl">⟵插入数学公式</a>
+    
+    
+      <a href="/2018/11/14/利用jar对apk进行签名/" class="link f-fr">利用jar对apk进行签名⟶</a>
+    
+  </footer>
+</section>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

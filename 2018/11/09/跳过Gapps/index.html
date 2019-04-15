@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Android跳过Gapps开机引导 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android手机在刷了Gapps之后，在开机进入系统时会进入Gapps的开机引导（也就是设置Google帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。 对于这种情况，可以通过以下方法解决：  连Google进行验证 断网 选择复制数据后点击跳过 顺时针点屏幕四角 更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED   连Google进行网站这个">
+<meta name="keywords" content="Android,刷机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android跳过Gapps开机引导">
+<meta property="og:url" content="http://blog.anscor.tw/2018/11/09/跳过Gapps/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="Android手机在刷了Gapps之后，在开机进入系统时会进入Gapps的开机引导（也就是设置Google帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。 对于这种情况，可以通过以下方法解决：  连Google进行验证 断网 选择复制数据后点击跳过 顺时针点屏幕四角 更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED   连Google进行网站这个">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-22T07:47:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android跳过Gapps开机引导">
+<meta name="twitter:description" content="Android手机在刷了Gapps之后，在开机进入系统时会进入Gapps的开机引导（也就是设置Google帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。 对于这种情况，可以通过以下方法解决：  连Google进行验证 断网 选择复制数据后点击跳过 顺时针点屏幕四角 更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED   连Google进行网站这个">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Android跳过Gapps开机引导</h2>
+  <p class="sub">Nov 9, 2018</p>
+  <article class="content">
+    <p><code>Android</code>手机在刷了<code>Gapps</code>之后，在开机进入系统时会进入<code>Gapps</code>的开机引导（也就是设置<code>Google</code>帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。</p>
+<p>对于这种情况，可以通过以下方法解决：</p>
+<ul>
+<li>连<code>Google</code>进行验证</li>
+<li>断网</li>
+<li>选择复制数据后点击跳过</li>
+<li>顺时针点屏幕四角</li>
+<li>更改<code>USER_SETUP_COMPLETE</code>和<code>DEVICE_PROVISIONED</code></li>
+</ul>
+<hr>
+<h2 id="连Google进行网站"><a href="#连Google进行网站" class="headerlink" title="连Google进行网站"></a>连<code>Google</code>进行网站</h2><p>这个方法就不多说了，只要能连上<code>Google</code>，就不会卡在这里了。至于怎么连<code>Google</code>，请自行寻找科学上网。</p>
+<hr>
+<h2 id="断网"><a href="#断网" class="headerlink" title="断网"></a>断网</h2><p>这个Gapps的开机引导是需要连网进行的，默认的情况下如果不连网的情况下是会自动跳过的。但是许多系统在默认情况下<code>Wifi</code>和数据是会自动打开，就算把卡取了，也还会有<code>Wifi</code>，一样无法跳过。对此，可选择先不刷<code>Gapps</code>，进入系统后将<code>Wifi</code>的数据关闭，再刷<code>Gapps</code>，此方法有一定弊端，有可能会导致<code>Gapps</code>某些应用发生某些玄学问题。。。。。</p>
+<hr>
+<h2 id="选择复制数据后点击跳过"><a href="#选择复制数据后点击跳过" class="headerlink" title="选择复制数据后点击跳过"></a>选择复制数据后点击跳过</h2><p>在设置时，可点击<strong>复制数据</strong>，而后拉到最底，点击<strong>离线设置</strong>后再进行一些设置就可进入系统。（但同样玄学的是，有时在<strong>复制数据</strong>里，并没有离线设置或使用本地设置这一选项╮(￣▽￣)╭）</p>
+<hr>
+<h2 id="顺时针点屏幕四角"><a href="#顺时针点屏幕四角" class="headerlink" title="顺时针点屏幕四角"></a>顺时针点屏幕四角</h2><p>这可能是最玄学的一个方法了，据传连点屏幕四角就可跳过此引导（<strong>顺时针</strong>方向，从左上角开始）。但是！！！但是！！！这是检验血统的时刻，时灵时不灵。别问我是怎么知道的。 (╯‵□′)╯︵┻━┻</p>
+<hr>
+<h2 id="更改USER-SETUP-COMPLETE和DEVICE-PROVISIONED"><a href="#更改USER-SETUP-COMPLETE和DEVICE-PROVISIONED" class="headerlink" title="更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED"></a>更改<code>USER_SETUP_COMPLETE</code>和<code>DEVICE_PROVISIONED</code></h2><p><strong>敲黑板！！！</strong> 这是我所试过最科学的方法。在开机情况下，将手机连上电脑，使用<code>adb</code>工具来修改<code>USER_SETUP_COMPLETE</code>和<code>DEVICE_PROVISIONED</code>的值。具体操作如下：    </p>
+<ul>
+<li>打开<strong>命令行</strong>，输入命令：<pre><code>adb shell settings put secure user_setup_complete 1
+adb shell settings put global device_provisioned 1
+</code></pre></li>
+<li>重启，搞定。    </li>
+</ul>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><ul>
+<li>在<code>WINDOWS</code>下，如果未将<code>adb.exe</code>文件所在路径添加至<strong>环境变量</strong>中，则需要在<code>adb.exe</code>文件所在目录下打开<strong>命令行</strong>，而后将上述命令中的<code>adb</code>更改为<code>./adb.exe</code>。</li>
+<li>上述命令运行错误时会有提示，而成功则没有。</li>
+</ul>
+<hr>
+<p>最后附上测试环境：<br>PC: Windwos 10<br>Android: LineageOS 15.0 for Xiaomi Mi 5<br>Gapps: open_gapps-arm64-8.0-aroma-20171021<br>adb: 1.0.39</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/11/14/利用jar对apk进行签名/" class="link f-fl">⟵利用jar对apk进行签名</a>
+    
+    
+  </footer>
+</section>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

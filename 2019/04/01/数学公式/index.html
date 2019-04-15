@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>数学公式 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文中所有LaTeX命令均在数学模式下。即被包含在$...$等中。符号{...}中表达式若不加说明，均默认代表可以为复杂公式复合而成。  上标、下标 上标使用^符号。如命令3^2显示结果为：$3^2$。 下标使用_符号。如命令3_2显示结果为：$3_2$。  上标与下标可在一个对象上同时使用，且与顺序无关。如命令3_2^2与3^2_2显示结果均为：$3_2^2$。 当上标或下标所包含的字母、数字等">
+<meta name="keywords" content="LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学公式">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/01/数学公式/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="本文中所有LaTeX命令均在数学模式下。即被包含在$...$等中。符号{...}中表达式若不加说明，均默认代表可以为复杂公式复合而成。  上标、下标 上标使用^符号。如命令3^2显示结果为：$3^2$。 下标使用_符号。如命令3_2显示结果为：$3_2$。  上标与下标可在一个对象上同时使用，且与顺序无关。如命令3_2^2与3^2_2显示结果均为：$3_2^2$。 当上标或下标所包含的字母、数字等">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+<meta property="og:updated_time" content="2019-04-01T15:10:54.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数学公式">
+<meta name="twitter:description" content="本文中所有LaTeX命令均在数学模式下。即被包含在$...$等中。符号{...}中表达式若不加说明，均默认代表可以为复杂公式复合而成。  上标、下标 上标使用^符号。如命令3^2显示结果为：$3^2$。 下标使用_符号。如命令3_2显示结果为：$3_2$。  上标与下标可在一个对象上同时使用，且与顺序无关。如命令3_2^2与3^2_2显示结果均为：$3_2^2$。 当上标或下标所包含的字母、数字等">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">数学公式</h2>
+  <p class="sub">Apr 1, 2019</p>
+  <article class="content">
+    <p>本文中所有<code>LaTeX</code>命令均在<strong>数学模式</strong>下。即被包含在<code>$...$</code>等中。符号<code>{...}</code>中表达式若不加说明，均默认代表可以为<strong>复杂公式</strong>复合而成。</p>
+<hr>
+<h2 id="上标、下标"><a href="#上标、下标" class="headerlink" title="上标、下标"></a>上标、下标</h2><ul>
+<li>上标使用<code>^</code>符号。如命令<code>3^2</code>显示结果为：$3^2$。</li>
+<li>下标使用<code>_</code>符号。如命令<code>3_2</code>显示结果为：$3_2$。</li>
+</ul>
+<p>上标与下标可在一个对象上同时使用，且与<strong>顺序无关</strong>。如命令<code>3_2^2</code>与<code>3^2_2</code>显示结果均为：$3_2^2$。</p>
+<p>当上标或下标所包含的字母、数字等<strong>超过1个</strong>时，需使用<code>{...}</code>将其括起来。否则<code>LaTeX</code>默认只使用<strong>最靠近</strong><code>_</code>和<code>^</code>符号的1个数字、字母作为下标或上标，其余数字、字母按正常数学模式下文本处理。如命令<code>3_{22}^{22}</code>显示结果为：$3_{22}^{22}$，而命令<code>3_22^22</code>显示结果则为：$3_22^22$。</p>
+<p>上标与下标可以进行<strong>嵌套</strong>使用，但在使用是需要将<strong>前一层次</strong>的所有内容使用<code>{...}</code>括起来，否则不会被解析成相应的格式。如命令<code>{3_2}_2</code>显示结果为：${3_2}_2$。上标同理。</p>
+<hr>
+<h2 id="开根号"><a href="#开根号" class="headerlink" title="开根号"></a>开根号</h2><p>使用<code>\sqrt[n]{x}</code>命令，其中<code>[n]</code>代表开多少次方，<strong>可省略</strong>。<code>n</code>，<code>x</code>均可以是复杂表达式。如<code>\sqrt[x^2+y_1]{x+y_1^2}</code>显示结果为：$\sqrt[x^2+y_1]{x+y_1^2}$。</p>
+<p>另一种<strong>平方根</strong>使用<code>\surd{x}</code>命令，如<code>\surd{x^2 + y^2}</code>显示结果为：$\surd{x^2 + y^2}$。</p>
+<hr>
+<h2 id="上、下水平线"><a href="#上、下水平线" class="headerlink" title="上、下水平线"></a>上、下水平线</h2><p>使用<code>\overline{x}</code>与<code>\underline{x}</code>进行上方、下方水平线的绘制。如命令<code>\overline{x + y_2^2}</code>显示结果为：$\overline{x + y_2^2}$，下水平线同理。</p>
+<hr>
+<h2 id="上、下方水平大括号"><a href="#上、下方水平大括号" class="headerlink" title="上、下方水平大括号"></a>上、下方水平大括号</h2><p>使用<code>\overbrace{x}</code>与<code>\underbrace{x}</code>进行上方、下方水平大括号的绘制，还可对其加上相应的上、下标。如命令<code>\underbrace{x + y_1^2}_3</code>显示结果为：$\underbrace{x + y_1^2}_3$、命令<code>\overbrace{x + y_1^2}^3</code>显示结果为：$\overbrace{x + y_1^2}^3$。</p>
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p><strong>上方</strong>水平大括号<strong>只可添加上标</strong>，不可添加下标，若添加了下标，则会出现<strong>错误解析</strong>，如命令<code>\overbrace{x + y_1^2}_3</code>显示结果为：$\overbrace{x + y_1^2}_3$、命令<code>\overbrace{x + y_1^2}_3^3</code>显示结果为：$\overbrace{x + y_1^2}_3^3$等。</p>
+<hr>
+<h2 id="分数"><a href="#分数" class="headerlink" title="分数"></a>分数</h2><p>使用<code>\frac{a}{b}</code>命令，其中<code>a</code>代表<strong>分子</strong>，<code>b</code>代表<strong>分母</strong>。如命令<code>\frac{x+10^2}{\frac{x}{y}+z_1}</code>显示结果为：$\frac{x+10^2}{\frac{x}{y}+z_1}$。</p>
+<hr>
+<h2 id="组合数"><a href="#组合数" class="headerlink" title="组合数"></a>组合数</h2><p>可使用<code>\tbinom{n}{k}</code>、<code>\dbinom{n}{k}</code>、<code>\binom{n}{k}</code>、<code>n \choose k</code>等命令。特殊地，在使用<code>n \choose k</code>命令时需要将其用<code>{...}</code>括起来。<code>n</code>，<code>k</code>均可为由复杂公式复合而成。几者区别如下：</p>
+<p>命令<code>\tbinom{n}{k} = 10, \dbinom{n}{k} = 10, \binom{n}{k} = 10, {n \choose k} = 10</code>显示结果分别为：$\tbinom{n}{k} = 10, \dbinom{n}{k} = 10, \binom{n}{k} = 10, {n \choose k} = 10$。</p>
+<hr>
+<h2 id="积分、求和、连乘"><a href="#积分、求和、连乘" class="headerlink" title="积分、求和、连乘"></a>积分、求和、连乘</h2><p>三者类似，下文以<strong>积分</strong>为例，<strong>求和</strong>与<strong>连乘</strong>同理。</p>
+<p>使用<code>\int</code>命令显示积分符号：$\int$</p>
+<p>积分<strong>上、下限</strong>可使用<strong>上、下标</strong>命令来实现，如<code>\int_{x + 1}^{+\infty}{x^2dx}</code>命令显示结果为：$\int_{x + 1}^{+\infty}{x^2dx}$。</p>
+<p>也可使用<code>\limits_{a}^{b}</code>命令，如<code>\int \limits_{x + 1}^{+\infty}{x^2dx}</code>显示结果为：$\displaystyle{\int \limits_{x + 1}^{+\infty}{x^2dx}}$。</p>
+<p><strong>求和</strong>使用<code>\sum</code>命令：$\sum$<br><strong>连乘</strong>使用<code>\prod</code>命令：$\prod$</p>
+<h4 id="注-1"><a href="#注-1" class="headerlink" title="注"></a>注</h4><p>对于<strong>多重积分</strong>，可使用<code>\iint</code>、<code>\iiint</code>、<code>\iiint</code>、<code>\iiiint</code>、<code>\idotsint</code>这几个命令（需要添加<code>amsmath</code>宏包），结果如下：</p>
+<p>$\iint \quad \iiint \quad \iiiint \quad \idotsint$</p>
+<p>对于<strong>环路积分</strong>，可使用<code>oint</code>命令：$\oint$。</p>
+<hr>
+<h2 id="极限"><a href="#极限" class="headerlink" title="极限"></a>极限</h2><p>使用<code>\lim</code>命令来显示极限符号：$\lim$。</p>
+<p>用<code>\limits_{ {a} \to {b} }</code>来表示趋近，如命令<code>\lim \limits_{ {x + 1} \to {a^-} }{x + 10}</code>显示结果为：$\lim \limits_{ {x + 1} \to {a^-}}{(x + 10)}$。</p>
+<p>也可直接使用<strong>下标</strong>来指定极限的趋近，命令<code>\lim_{ {x + 1} \to {a^-} }{x + 10}</code>显示结果为：$\lim_{ {x + 1} \to {a^-}}{(x + 10)}$。</p>
+<hr>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p>向量符号可由<code>\vec{x}</code>命令得到，如命令<code>\vec{x}</code>显示结果为：$\vec{x}$。</p>
+<p>当需要表示的向量的符号有多个时，可使用<code>\overrightarrow{x}</code>和<code>overleftarrow</code>命令扩展向量符号长度，如命令<code>\overrightarrow{AB}</code>、<code>\overrightarrow{A + B}</code>显示结果为：$\overrightarrow{AB}$、$\overleftarrow{A + B}$</p>
+<hr>
+<h2 id="显示模式"><a href="#显示模式" class="headerlink" title="显示模式"></a>显示模式</h2><p>在显示数学公式时，可将公式包含在<code>\displaystyle{x}</code>中，可以改善显示效果。</p>
+<p>如命令<code>\frac{x+10^2}{\frac{x}{y}+z_1}</code>与命令<code>\displaystyle{\frac{x+10^2}{\frac{x}{y}+z_1}}</code>显示结果为：$\frac{x+10^2}{\frac{x}{y}+z_1}$、$\displaystyle{\frac{x+10^2}{\frac{x}{y}+z_1}}$。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/01/特殊符号/" class="link f-fl">⟵特殊符号</a>
+    
+    
+      <a href="/2019/04/01/AMS数学符号/" class="link f-fr">AMS数学符号⟶</a>
+    
+  </footer>
+</section>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" },
+        extensions: ["AMSmath.js", "AMSsymbols.js"]
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>AVL树 | Anscor&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="普通的二叉搜索树的退化在使用二叉搜索树时，只规定了左子树的值小于根节点的值，右子树的值大于根节点的值，并没有对树的形状做出要求。 在树较为平衡（左右子树高度相差较小）时，如下图所示：我们在二叉搜索树上进行的增加、删除、查找的操作的时间复杂度平均为$O(log\,n)$。 但是在树比较倾斜时，在二叉搜索树上的操作的时间复杂度也会随之增加，树越倾斜，退化也就越严重，时间复杂度也就越高。 一种极端情况下">
+<meta name="keywords" content="平衡树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AVL树">
+<meta property="og:url" content="http://blog.anscor.tw/2019/04/05/AVL树/index.html">
+<meta property="og:site_name" content="Anscor&#39;s Blog">
+<meta property="og:description" content="普通的二叉搜索树的退化在使用二叉搜索树时，只规定了左子树的值小于根节点的值，右子树的值大于根节点的值，并没有对树的形状做出要求。 在树较为平衡（左右子树高度相差较小）时，如下图所示：我们在二叉搜索树上进行的增加、删除、查找的操作的时间复杂度平均为$O(log\,n)$。 但是在树比较倾斜时，在二叉搜索树上的操作的时间复杂度也会随之增加，树越倾斜，退化也就越严重，时间复杂度也就越高。 一种极端情况下">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/05/5ca70077433a4.png">
+<meta property="og:updated_time" content="2019-04-07T11:39:29.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AVL树">
+<meta name="twitter:description" content="普通的二叉搜索树的退化在使用二叉搜索树时，只规定了左子树的值小于根节点的值，右子树的值大于根节点的值，并没有对树的形状做出要求。 在树较为平衡（左右子树高度相差较小）时，如下图所示：我们在二叉搜索树上进行的增加、删除、查找的操作的时间复杂度平均为$O(log\,n)$。 但是在树比较倾斜时，在二叉搜索树上的操作的时间复杂度也会随之增加，树越倾斜，退化也就越严重，时间复杂度也就越高。 一种极端情况下">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/05/5ca70077433a4.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Anscor</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/anscor" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">主页</a>
+          
+        
+            <a href="/tags" class="nav-menu ">标签</a>
+          
+        
+            <a href="/categories" class="nav-menu ">类别</a>
+          
+        
+            <a href="/archives" class="nav-menu ">归档</a>
+          
+        
+            <a href="/about" class="nav-menu ">关于</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">AVL树</h2>
+  <p class="sub">Apr 5, 2019</p>
+  <article class="content">
+    <h2 id="普通的二叉搜索树的退化"><a href="#普通的二叉搜索树的退化" class="headerlink" title="普通的二叉搜索树的退化"></a>普通的二叉搜索树的退化</h2><p>在使用二叉搜索树时，只规定了左子树的值小于根节点的值，右子树的值大于根节点的值，并没有对树的形状做出要求。</p>
+<p>在树较为平衡（左右子树高度相差较小）时，如下图所示：<br><img src="https://i.loli.net/2019/04/05/5ca70077433a4.png" alt="平衡时"><br>我们在二叉搜索树上进行的增加、删除、查找的操作的时间复杂度平均为$O(log\,n)$。</p>
+<p>但是在树比较倾斜时，在二叉搜索树上的操作的时间复杂度也会随之增加，树越倾斜，退化也就越严重，时间复杂度也就越高。</p>
+<p>一种极端情况下，当所有的节点（除叶节点外）都只有一个子树或子节点时，该树结构会退化为链表，相应的时间复杂度也会退化为$O(n)$。<br><img src="https://i.loli.net/2019/04/05/5ca7019606119.png" alt="不平衡时"></p>
+<p>为了解决这个问题，<strong>平衡树</strong>也就应运而生。其中最早的平衡树便是本文的重点——<strong>AVL树</strong>。</p>
+<hr>
+<h2 id="什么是AVL树"><a href="#什么是AVL树" class="headerlink" title="什么是AVL树"></a>什么是AVL树</h2><p>AVL树是最早被发明的<strong>自平衡二叉搜索树</strong>。它的名字不是自平衡二叉搜索树的缩写，而是来源于它的发明者<code>G. M. Adelson-Velsky</code>和<code>Evgenii Landis</code>。</p>
+<p>AVL树在二叉搜索树的性质上增加了一条——任一节点的两个子树<strong>高度差最大</strong>为1。因此，AVL树在执行增加、删除、查找操作的时间复杂度在平均、最坏情况下均为$O(log\,n)$。不会出现二叉搜索树中退化的情况。</p>
+<hr>
+<h2 id="平衡因子"><a href="#平衡因子" class="headerlink" title="平衡因子"></a>平衡因子</h2><p>AVL树中使用这个参数来判定当前节点是否是平衡的。平衡因子由当前节点的左子树高度减去右子树高度得到。</p>
+<p>所以当一个节点的平衡因子大于1或小于-1时，则可以判定当前节点不平衡，需要进行调整。</p>
+<p>另外，AVL树中也可以不保存节点的平衡因子，而保存树的高度，在需要时计算得到。</p>
+<hr>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>旋转是一种改变树的平衡性的操作，几乎所有的平衡树都是通过旋转操作来调整树的结构，使树保持平衡状态。</p>
+<p>旋转分为两类：</p>
+<ul>
+<li>左旋转</li>
+<li>右旋转</li>
+</ul>
+<h3 id="左旋转"><a href="#左旋转" class="headerlink" title="左旋转"></a>左旋转</h3><p>总共3步：</p>
+<ul>
+<li>将根节点的右子节点设置为右子节点的左子节点。</li>
+<li>将右子节点的左子节点设置为根节点。</li>
+<li>将右子节点设置为根节点。</li>
+</ul>
+<p>相应的代码为：</p>
+<pre><code class="C++">AVLTreeNode* RotateL(AVLTreeNode* root) {
+    AVLTreeNode* temp = root-&gt;right;
+    root-&gt;right = temp-&gt;left;
+    temp-&gt;left = root;
+
+    return temp;
+}
+</code></pre>
+<p>旋转前后对比：<br><img src="https://i.loli.net/2019/04/05/5ca70acdd1b0c.png" alt="左旋转"></p>
+<p>从图中可以看出，左旋转之后，相比于原来的树，左子树高度增加了1，右子树高度减少了1。</p>
+<h3 id="右旋转"><a href="#右旋转" class="headerlink" title="右旋转"></a>右旋转</h3><p>类似于左旋转，也为三步：</p>
+<ul>
+<li>将根节点的左子节点设置为左子节点的右子节点。</li>
+<li>将左子节点的右子节点设置为根节点。</li>
+<li>将左子节点设置为根节点。</li>
+</ul>
+<p>相应的代码为：</p>
+<pre><code class="C++">AVLTreeNode* RotateR(AVLTreeNode* root) {
+    AVLTreeNode* temp = root-&gt;left;
+    root-&gt;left = temp-&gt;right;
+    temp-&gt;right = root;
+
+    return temp;
+}
+</code></pre>
+<p>旋转前后对比：<br><img src="https://i.loli.net/2019/04/05/5ca70c388974d.png" alt="右旋转"></p>
+<p>从图中可以看出，右旋转之后，相比于原来的树，右子树高度增加了1，左子树高度减少了1。</p>
+<hr>
+<h2 id="AVL树中不平衡情况及对应旋转操作"><a href="#AVL树中不平衡情况及对应旋转操作" class="headerlink" title="AVL树中不平衡情况及对应旋转操作"></a>AVL树中不平衡情况及对应旋转操作</h2><p>在操作AVL树过程中，总共会遇到4种不平衡的情况：<strong>LL</strong>、<strong>RR</strong>、<strong>LR</strong>、<strong>RL</strong>。</p>
+<h3 id="LL情况——右旋转"><a href="#LL情况——右旋转" class="headerlink" title="LL情况——右旋转"></a>LL情况——右旋转</h3><p><code>LL</code>情况是指根节点的<strong>左</strong>子节点的<strong>左</strong>子树高度比右子树高度大2的情况。即：<br><img src="https://i.loli.net/2019/04/05/5ca7111b5d360.png" alt="LL"><br>图中<code>A</code>节点为根节点。</p>
+<p>进行一次<strong>右旋转</strong>即可使树重新平衡。</p>
+<h3 id="RR情况——左旋转"><a href="#RR情况——左旋转" class="headerlink" title="RR情况——左旋转"></a>RR情况——左旋转</h3><p><code>RR</code>情况是指根节点的<strong>右</strong>子节点的<strong>右</strong>子树高度比左子树高度大2的情况。即：<br><img src="https://i.loli.net/2019/04/05/5ca711edca077.png" alt="RR"><br>图中<code>A</code>节点为根节点。</p>
+<p>进行一次<strong>左旋转</strong>即可使树重新平衡。</p>
+<h3 id="LR情况——先左旋转，再右旋转"><a href="#LR情况——先左旋转，再右旋转" class="headerlink" title="LR情况——先左旋转，再右旋转"></a>LR情况——先左旋转，再右旋转</h3><p><code>LR</code>情况是指根节点的<strong>左</strong>子节点的<strong>右</strong>子树比左子树高度大2的情况。即：<br><img src="https://i.loli.net/2019/04/05/5ca7125038f41.png" alt="LR"><br>图中<code>A</code>节点为根节点。</p>
+<p>此时需进行两次旋转：</p>
+<ul>
+<li>先以左子节点（<code>B</code>）为根进行一次<strong>左旋转</strong>。（将情况转化为<code>LL</code>情况）</li>
+<li>再以<code>A</code>节点为根进行一次<strong>右旋转</strong>。</li>
+</ul>
+<h3 id="RL情况——先右旋转，再左旋转"><a href="#RL情况——先右旋转，再左旋转" class="headerlink" title="RL情况——先右旋转，再左旋转"></a>RL情况——先右旋转，再左旋转</h3><p><code>RL</code>情况是指根节点的<strong>右</strong>子节点的<strong>左</strong>子树比右子树高度大2的情况。即：<br><img src="https://i.loli.net/2019/04/05/5ca7137e29514.png" alt="RL"><br>图中<code>A</code>节点为根节点。</p>
+<p>此时需进行两次旋转：</p>
+<ul>
+<li>先以右子节点（<code>B</code>）为根进行一次<strong>右旋转</strong>。（将情况转化为<code>RR</code>情况）</li>
+<li>再以<code>A</code>节点为根进行一次<strong>左旋转</strong>。</li>
+</ul>
+<hr>
+<h2 id="AVL树的操作"><a href="#AVL树的操作" class="headerlink" title="AVL树的操作"></a>AVL树的操作</h2><p>在AVL树上操作主要有三种：<strong>增加</strong>、<strong>删除</strong>、<strong>查找</strong>。</p>
+<p>三种操作与二叉搜索树上对应的三种操作基本相同，只是增加、删除操作有可能会引起树的不平衡，需要进行额外调整。</p>
+<p>为便于说明，此处先对AVL树结构进行说明：</p>
+<pre><code class="C++">class AVLTree {
+  private:
+    class AVLTreeNode {
+      public:
+        int val;              /// 当前节点所存的数值
+        int height;           /// 当前节点的高度
+        AVLTreeNode* left;    /// 左子树
+        AVLTreeNode* right;   /// 右子树
+
+        // 得到root节点的高度
+        static int Height(AVLTreeNode* root);
+
+        AVLTreeNode(int val = 0);
+        ~AVLTreeNode();
+    };
+
+    // 内部树结构
+    AVLTreeNode* root;
+
+    // 计算root节点的高度
+    void CalcHeight(AVLTreeNode* root);
+
+    // 取得以root为根的树上的最大值节点
+    AVLTreeNode* FindMax(AVLTreeNode* root);
+
+    // 取得以root为根的树上的最小值节点
+    AVLTreeNode* FindMin(AVLTreeNode* root);
+
+    // LL情况，以root为根进行右旋转
+    AVLTreeNode* RotateLL(AVLTreeNode* root);
+    // LR情况，先以root节点左儿子为根进行左旋转，再以root为根进行右旋转
+    AVLTreeNode* RotateLR(AVLTreeNode* root);
+    // RR情况，以root为根进行左旋转
+    AVLTreeNode* RotateRR(AVLTreeNode* root);
+    // RL情况，先以root节点右儿子为根进行右旋转，再以root为根进行左旋转
+    AVLTreeNode* RotateRL(AVLTreeNode* root);
+
+    // 向AVL树内插入值为val的一个节点，返回插入该节点后，整个树的根节点
+    // result返回插入结果，成功插入则返回1，如果该值已经存在则返回0
+    AVLTreeNode* Insert(AVLTreeNode* root, int val, int&amp; result);
+
+    // 在AVL树中删除值为val的节点，如果不存在则跳过，返回删除该节点后，整个树的根节点
+    // result返回删除结果，成功删除则返回1，如果该值不存在则返回0
+    AVLTreeNode* Remove(AVLTreeNode* root, int val, int&amp; result);
+
+    // 在AVLTree销毁时，递归释放整颗树
+    void DeleteRoot(AVLTreeNode* root);
+
+    // 中序遍历整颗树
+    void Print(AVLTreeNode* root);
+
+  public:
+    AVLTree();
+    ~AVLTree();
+
+    // 向AVL树内插入值为val的一个节点，若成功插入则返回1，若已存在些节点则返回0
+    int Insert(int val);
+    // 在AVL树中删除值为val的节点，若成功删除则返回1，若该节点不存在则返回0
+    int Remove(int val);
+    // 在AVL树中查找值为val的节点，该节点存在则返回1，否则返回0
+    int Find(int val);
+
+    // 中序遍历整颗树
+    void Print();
+};
+</code></pre>
+<p>其中两个辅助函数具体实现为：</p>
+<pre><code class="C++">int AVLTree::AVLTreeNode::Height(AVLTreeNode* root) {
+    // 返回当前节点的高度，若为空则返回-1
+    return root ? root-&gt;height : -1;
+}
+</code></pre>
+<pre><code class="C++">void AVLTree::CalcHeight(AVLTreeNode* root) {
+    // 当前节点的高度为左、右子树最高者高度 + 1
+    root-&gt;height = std::max(AVLTree::AVLTreeNode::Height(root-&gt;left),
+                            AVLTree::AVLTreeNode::Height(root-&gt;right)) +
+                   1;
+}
+</code></pre>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>主要分4步：</p>
+<ul>
+<li>寻找到插入的位置。（如果值已经存在则插入失败）</li>
+<li>创建节点并插入。</li>
+<li>如果插入操作引起了不平衡，进行调整。</li>
+<li>回溯时计算出沿插入路径上所有节点的新高度。</li>
+</ul>
+<p>插入操作函数为：</p>
+<pre><code class="C++">AVLTree::AVLTreeNode* AVLTree::Insert(AVLTreeNode* root, int val, int&amp; result) {
+    result = 0;
+    // 如果当前节点为空，则返回一个新建的节点
+    if (!root) {
+        root = new AVLTreeNode(val);
+        result = 1;
+        return root;
+    }
+
+    // 当前节点值比要插入的值大，则应向左子树进行插入
+    if (root-&gt;val &gt; val) {
+        // 向左子树插入值为val的节点
+        root-&gt;left = Insert(root-&gt;left, val, result);
+
+        // 如果在向左子树插入节点后，引起了树的不平衡（即左子树比右子树高2个单位），则需进行旋转调整
+        // 因为是向左子树插入，所以左子树的高度必定大于等于右子树的高度
+        if (AVLTreeNode::Height(root-&gt;left) -
+                AVLTreeNode::Height(root-&gt;right) ==
+            2) {
+            // 如果是插入的左子节点的左子树，则对应LL情况，只需进行右单旋转即可
+            if (val &lt; root-&gt;left-&gt;val) root = RotateLL(root);
+            // 否则为LR情况，需进行两次旋转
+            else
+                root = RotateLR(root);
+        }
+    }
+    // 当前节点值比要插入的值小，则应向右子树进行插入
+    else if (val &gt; root-&gt;val) {
+        // 向左子树插入值为val的节点
+        root-&gt;right = Insert(root-&gt;right, val, result);
+
+        // 如果在向右子树插入节点后，引起了树的不平衡（即右子树比左子树高2个单位），则需进行旋转调整
+        // 因为是向右子树插入，所以右子树的高度必定大于等于左子树的高度
+        if (AVLTreeNode::Height(root-&gt;right) -
+                AVLTreeNode::Height(root-&gt;left) ==
+            2) {
+            // 如果是插入的右子树的右子树，则对应RR情况，只需进行左单旋转即可
+            if (val &gt; root-&gt;right-&gt;val) root = RotateRR(root);
+            // 否则为RL情况，需进行两次旋转
+            else
+                root = RotateRL(root);
+        }
+    }
+
+    // 回溯时计算出沿插入路径上所有节点的新高度
+    CalcHeight(root);
+    return root;
+}
+</code></pre>
+<p>由于高度是通过回溯进行更新的，所以当插入完成后，以<code>root</code>为根的左右子树的高度均以更新完成，只需要用左右子树新的高度差即可判断出是否不平衡。</p>
+<p>如果不平衡，通过插入值<code>val</code>与<code>root</code>节点值的相对大小即可判断出相应的不平衡的类型。进行对应的操作即可。</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>与插入类似，也分为4步：</p>
+<ul>
+<li>寻找到要删除的节点的位置。（如果值不存在则删除失败）</li>
+<li>如果对应节点只有一个子节点，直接删除；若有两个子节点，则需找出对应的替代节点之后，再进行删除。</li>
+<li>如果删除操作引起了不平衡，进行调整。</li>
+<li>回溯时计算出沿删除路径上所有节点的新高度。</li>
+</ul>
+<p>具体实现如下：</p>
+<pre><code class="C++">AVLTree::AVLTreeNode* AVLTree::Remove(AVLTreeNode* root, int val, int&amp; result) {
+    result = 0;
+    if (!root) {
+        return nullptr;
+    }
+    // 待删除节点位于右子树
+    if (root-&gt;val &lt; val) {
+        // 在右子树中删除节点
+        root-&gt;right = Remove(root-&gt;right, val, result);
+        // 如果删除后引起了树的不平衡（即左子树的高度与右子树的高度差为2），则需要进行旋转调整
+        if (AVLTreeNode::Height(root-&gt;left) -
+                AVLTreeNode::Height(root-&gt;right) ==
+            2) {
+            // 如果右儿子的左子树的高度小于右儿子的右子树的高度，
+            // 则删除的节点位于右儿子的左子树上，不平衡情况对应RR，
+            // 进行左旋转即可
+            if (AVLTreeNode::Height(root-&gt;right-&gt;left) &lt;
+                AVLTreeNode::Height(root-&gt;right-&gt;right))
+                root = RotateRR(root);
+            // 否则删除的节点位于右儿子的右子树上，不平衡情况对应RL，
+            // 需进行两次旋转
+            else
+                root = RotateRL(root);
+        }
+    }
+    // 待删除节点位于左子树
+    else if (root-&gt;val &gt; val) {
+        // 在左子树中删除节点
+        root-&gt;left = Remove(root-&gt;left, val, result);
+
+        // 如果删除后引起了树的不平衡（即右子树的高度与左子树的高度差为2），则需要进行旋转调整
+        if (AVLTreeNode::Height(root-&gt;right) -
+                AVLTreeNode::Height(root-&gt;left) ==
+            2) {
+            // 如果左儿子的右子树的高度小于左儿子的左子树的高度，
+            // 则删除的节点位于左儿子的右子树上，不平衡情况对应LL，
+            // 进行右旋转即可
+            if (AVLTreeNode::Height(root-&gt;left-&gt;right) &lt;
+                AVLTreeNode::Height(root-&gt;left-&gt;left))
+                root = RotateLL(root);
+            // 否则删除的节点位于左儿子的左子树上，不平衡情况对应LR，
+            // 需进行两次旋转
+            else
+                root = RotateLR(root);
+        }
+    }
+    // 否则应当删除当前节点
+    else {
+        result = 1;
+        int t;
+        // 当前节点有两个子节点，则从中选取高度大的一个子树进行替代，避免引起树的不平衡
+        if (root-&gt;left &amp;&amp; root-&gt;right) {
+            // 左子树高度大于右子树时，选取左子树中最大值替代当前节点，并删除原最大值节点
+            if (AVLTreeNode::Height(root-&gt;left) &gt;
+                AVLTreeNode::Height(root-&gt;right)) {
+                AVLTreeNode* temp = FindMax(root-&gt;left);
+                root-&gt;val = temp-&gt;val;
+                root-&gt;left = Remove(root-&gt;left, temp-&gt;val, t);
+            }
+            // 否则，选取右子树中最小值替代当前节点，并删除原最小值节点
+            else {
+                AVLTreeNode* temp = FindMin(root-&gt;right);
+                root-&gt;val = temp-&gt;val;
+                root-&gt;right = Remove(root-&gt;right, temp-&gt;val, t);
+            }
+        }
+        // 如果当前节点只有一个子节点或没有子节点，直接删除即可
+        else {
+            AVLTreeNode* temp = root;
+            root = root-&gt;left ? root-&gt;left : root-&gt;right;
+            delete temp;
+        }
+    }
+
+    // 如果返回节点不为空时，回溯地计算出删除路径上所有节点的新高度
+    if (root) CalcHeight(root);
+    return root;
+}
+</code></pre>
+<p>其中两个辅助函数实现如下：</p>
+<pre><code class="C++">AVLTree::AVLTreeNode* AVLTree::FindMax(AVLTreeNode* root) {
+    if (!root) return nullptr;
+    AVLTreeNode* temp = root;
+    while (temp-&gt;right) temp = temp-&gt;right;
+    return temp;
+}
+</code></pre>
+<pre><code class="C++">AVLTree::AVLTreeNode* AVLTree::FindMin(AVLTreeNode* root) {
+    if (!root) return nullptr;
+    AVLTreeNode* temp = root;
+    while (temp-&gt;left) temp = temp-&gt;left;
+    return temp;
+}
+</code></pre>
+<p>与插入类似，通过高度差判断是否不平衡，通过相对值大小判断具体不平衡类型。</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>与二叉搜索树查找相同，不再赘述。</p>
+<hr>
+<h2 id="相同值的处理"><a href="#相同值的处理" class="headerlink" title="相同值的处理"></a>相同值的处理</h2><p>上述结构仅支持序列中没有相同值的情况，如果存在一组有相同值的序列，并且想将相同的值都存储下来，则需要对此结构进行一些修改。</p>
+<p>一种办法是在<code>AVLTreeNode</code>结构中添加一个<code>indexs</code>属性用于存储对应值在原序列中的位置，如果插入时值相同，则向<code>indexs</code>中添加对应的位置编号。</p>
+<hr>
+<h2 id="附注"><a href="#附注" class="headerlink" title="附注"></a>附注</h2><p>文中完整代码请参考：<a href="https://github.com/anscor/BlogCode/tree/master/AVLTree。" target="_blank" rel="noopener">https://github.com/anscor/BlogCode/tree/master/AVLTree。</a></p>
+<p>另附两个数据结构的<strong>可视化</strong>网站，在进行较为抽象的数据结构与算法学习时，可以用于直观地检验自己编写代码的正确性：</p>
+<ul>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
+<li><a href="https://visualgo.net/en" target="_blank" rel="noopener">https://visualgo.net/en</a></li>
+</ul>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://zh.wikipedia.org/wiki/AVL%E6%A0%91" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/AVL%E6%A0%91</a></li>
+<li><a href="https://gaomf.cn/2017/02/11/Data_Structure_AVLTree/" target="_blank" rel="noopener">https://gaomf.cn/2017/02/11/Data_Structure_AVLTree/</a></li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/07/红黑树/" class="link f-fl">⟵红黑树</a>
+    
+    
+      <a href="/2019/04/01/特殊符号/" class="link f-fr">特殊符号⟶</a>
+    
+  </footer>
+</section>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" },
+        extensions: ["AMSmath.js", "AMSsymbols.js"]
+    },
+    messageStyle: "none"
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</div>
+    <footer id="footer" class="f-cf">
+  xlyanscor@outlook.com
+  
+    
+      
+        · <a href="https://github.com/anscor" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Anscor</span>
+  <script src="/jquery-3.3.1.min.js"></script>
+  <script src="/plugins/prettify/prettify.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    });
+  </script>
+</footer>
+  </div>
+</body>
+</html>
