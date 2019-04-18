@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/04/5c06977c2f435.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/04/5c06977ca105f.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/04/5c06977c52e94.png">
-<meta property="og:updated_time" content="2018-12-04T15:07:14.000Z">
+<meta property="og:updated_time" content="2019-04-18T05:09:28.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用jar对apk进行签名">
 <meta name="twitter:description" content="准备工作首先将jdk中的bin文件夹添加至path环境变量中，准备一个未签名的apk应用。 判断是否签名要判断一个apk文件是否已经进行过签名，使用解压应用（如WinRAR等）打开该文件，查看是否有一个META-INF的文件夹，如果有则代表已经签名；没有则表示没有签名。  将一个已经签名的应用转化为一个未签名的应用方法非常简单，只需要将应用中的META-INF文件夹删除就可以了。 可在解压应用界面">
@@ -38,6 +38,7 @@
 
 ">
   <div id="container">
+    
     <nav id="nav">
   <header class="header">
     <a href="/" class="title">Anscor</a>
@@ -74,7 +75,13 @@
     </div>
   </div>
 </nav>
-    <div id="main"><section class="article">
+    <div id="main">
+      <aside id="toc-aside">
+  <nav id="toc-nav">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#判断是否签名"><span class="post-toc-number">2.</span> <span class="post-toc-text">判断是否签名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用keytool创建密钥"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用keytool创建密钥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用jarsigner进行签名"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用jarsigner进行签名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注："><span class="post-toc-number">5.</span> <span class="post-toc-text">注：</span></a></li></ol>
+  </nav>
+</aside>
+<section class="article">
   <h2 class="title">利用jar对apk进行签名</h2>
   <p class="sub">Nov 14, 2018</p>
   <article class="content">
@@ -134,7 +141,9 @@
     
   </footer>
 </section>
-</div>
+
+
+    </div>
     <footer id="footer" class="f-cf">
   xlyanscor@outlook.com
   
@@ -147,6 +156,7 @@
   <span class="copyright">All rights reserved @Anscor</span>
   <script src="/jquery-3.3.1.min.js"></script>
   <script src="/plugins/prettify/prettify.js"></script>
+  <script src="/toc.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');

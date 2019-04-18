@@ -14,7 +14,7 @@
 <meta property="og:description" content="LaTeX是一种基于TeX的排版系统。作为一种标记语言，其在语法结构上与HTML非常相似。 下面是一个LaTeX最基本的结构： \documentclass[options]{class} % 这是前言 \begin{document}     % 这是正文 \end{document}  文档类型说明上例中第一行所示(\documentclass[options]{class})。此语句一般位于">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2019/04/01/5ca19e9ba7c3c.png">
-<meta property="og:updated_time" content="2019-04-01T05:16:24.000Z">
+<meta property="og:updated_time" content="2019-04-18T05:03:09.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX文档基本结构">
 <meta name="twitter:description" content="LaTeX是一种基于TeX的排版系统。作为一种标记语言，其在语法结构上与HTML非常相似。 下面是一个LaTeX最基本的结构： \documentclass[options]{class} % 这是前言 \begin{document}     % 这是正文 \end{document}  文档类型说明上例中第一行所示(\documentclass[options]{class})。此语句一般位于">
@@ -30,6 +30,7 @@
 
 ">
   <div id="container">
+    
     <nav id="nav">
   <header class="header">
     <a href="/" class="title">Anscor</a>
@@ -66,7 +67,13 @@
     </div>
   </div>
 </nav>
-    <div id="main"><section class="article">
+    <div id="main">
+      <aside id="toc-aside">
+  <nav id="toc-nav">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文档类型说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">文档类型说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言-preamble-部分"><span class="post-toc-number">2.</span> <span class="post-toc-text">前言(preamble)部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正文部分"><span class="post-toc-number">3.</span> <span class="post-toc-text">正文部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注释部分"><span class="post-toc-number">4.</span> <span class="post-toc-text">注释部分</span></a></li></ol>
+  </nav>
+</aside>
+<section class="article">
   <h2 class="title">LaTeX文档基本结构</h2>
   <p class="sub">Apr 1, 2019</p>
   <article class="content">
@@ -127,7 +134,9 @@
     
   </footer>
 </section>
-</div>
+
+
+    </div>
     <footer id="footer" class="f-cf">
   xlyanscor@outlook.com
   
@@ -140,6 +149,7 @@
   <span class="copyright">All rights reserved @Anscor</span>
   <script src="/jquery-3.3.1.min.js"></script>
   <script src="/plugins/prettify/prettify.js"></script>
+  <script src="/toc.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');

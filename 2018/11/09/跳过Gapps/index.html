@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Anscor&#39;s Blog">
 <meta property="og:description" content="Android手机在刷了Gapps之后，在开机进入系统时会进入Gapps的开机引导（也就是设置Google帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。 对于这种情况，可以通过以下方法解决：  连Google进行验证 断网 选择复制数据后点击跳过 顺时针点屏幕四角 更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED   连Google进行网站这个">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-22T07:47:16.000Z">
+<meta property="og:updated_time" content="2019-04-18T05:16:44.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android跳过Gapps开机引导">
 <meta name="twitter:description" content="Android手机在刷了Gapps之后，在开机进入系统时会进入Gapps的开机引导（也就是设置Google帐号神马的）。但是这需要连Google进行验证，于是。。。。。。。。 对于这种情况，可以通过以下方法解决：  连Google进行验证 断网 选择复制数据后点击跳过 顺时针点屏幕四角 更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED   连Google进行网站这个">
@@ -28,6 +28,7 @@
 
 ">
   <div id="container">
+    
     <nav id="nav">
   <header class="header">
     <a href="/" class="title">Anscor</a>
@@ -64,7 +65,13 @@
     </div>
   </div>
 </nav>
-    <div id="main"><section class="article">
+    <div id="main">
+      <aside id="toc-aside">
+  <nav id="toc-nav">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#连Google进行网站"><span class="post-toc-number">1.</span> <span class="post-toc-text">连Google进行网站</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#断网"><span class="post-toc-number">2.</span> <span class="post-toc-text">断网</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#选择复制数据后点击跳过"><span class="post-toc-number">3.</span> <span class="post-toc-text">选择复制数据后点击跳过</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺时针点屏幕四角"><span class="post-toc-number">4.</span> <span class="post-toc-text">顺时针点屏幕四角</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更改USER-SETUP-COMPLETE和DEVICE-PROVISIONED"><span class="post-toc-number">5.</span> <span class="post-toc-text">更改USER_SETUP_COMPLETE和DEVICE_PROVISIONED</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注："><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">注：</span></a></li></ol></li></ol>
+  </nav>
+</aside>
+<section class="article">
   <h2 class="title">Android跳过Gapps开机引导</h2>
   <p class="sub">Nov 9, 2018</p>
   <article class="content">
@@ -78,7 +85,7 @@
 <li>更改<code>USER_SETUP_COMPLETE</code>和<code>DEVICE_PROVISIONED</code></li>
 </ul>
 <hr>
-<h2 id="连Google进行网站"><a href="#连Google进行网站" class="headerlink" title="连Google进行网站"></a>连<code>Google</code>进行网站</h2><p>这个方法就不多说了，只要能连上<code>Google</code>，就不会卡在这里了。至于怎么连<code>Google</code>，请自行寻找科学上网。</p>
+<h2 id="连Google进行网站"><a href="#连Google进行网站" class="headerlink" title="连Google进行网站"></a>连<code>Google</code>进行网站</h2><p>这个方法就不多说了，只要能连上<code>Google</code>，就不会卡在这里了。至于怎么连<code>Google</code>，请自行寻找￥&amp;科￥学@￥上￥#网￥。</p>
 <hr>
 <h2 id="断网"><a href="#断网" class="headerlink" title="断网"></a>断网</h2><p>这个Gapps的开机引导是需要连网进行的，默认的情况下如果不连网的情况下是会自动跳过的。但是许多系统在默认情况下<code>Wifi</code>和数据是会自动打开，就算把卡取了，也还会有<code>Wifi</code>，一样无法跳过。对此，可选择先不刷<code>Gapps</code>，进入系统后将<code>Wifi</code>的数据关闭，再刷<code>Gapps</code>，此方法有一定弊端，有可能会导致<code>Gapps</code>某些应用发生某些玄学问题。。。。。</p>
 <hr>
@@ -108,7 +115,9 @@ adb shell settings put global device_provisioned 1
     
   </footer>
 </section>
-</div>
+
+
+    </div>
     <footer id="footer" class="f-cf">
   xlyanscor@outlook.com
   
@@ -121,6 +130,7 @@ adb shell settings put global device_provisioned 1
   <span class="copyright">All rights reserved @Anscor</span>
   <script src="/jquery-3.3.1.min.js"></script>
   <script src="/plugins/prettify/prettify.js"></script>
+  <script src="/toc.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');

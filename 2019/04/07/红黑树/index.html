@@ -14,7 +14,7 @@
 <meta property="og:description" content="红黑树是一种自平衡的二叉搜索树，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。 但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。 与普通二叉搜索树的区别节点 颜色：相比于普通的二叉搜索树，红黑树的节点增加了一个颜色属性：黑色或红色，这也是红黑树名字的由来">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9e319d75d0.png">
-<meta property="og:updated_time" content="2019-04-13T15:28:43.104Z">
+<meta property="og:updated_time" content="2019-04-18T05:07:21.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="红黑树">
 <meta name="twitter:description" content="红黑树是一种自平衡的二叉搜索树，与AVL树类似，在其上进行的插入、删除、查找操作的平均时间复杂度均为$O(log\,n)$。 但与AVL树不同的是，红黑树的平衡不是非常严格的平衡（即左右子树高度差不超过1），它牺牲了部分平衡性来换取了插入、删除时的少量旋转操作（最多3次）。 与普通二叉搜索树的区别节点 颜色：相比于普通的二叉搜索树，红黑树的节点增加了一个颜色属性：黑色或红色，这也是红黑树名字的由来">
@@ -30,6 +30,7 @@
 
 ">
   <div id="container">
+    
     <nav id="nav">
   <header class="header">
     <a href="/" class="title">Anscor</a>
@@ -66,7 +67,13 @@
     </div>
   </div>
 </nav>
-    <div id="main"><section class="article">
+    <div id="main">
+      <aside id="toc-aside">
+  <nav id="toc-nav">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#与普通二叉搜索树的区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">与普通二叉搜索树的区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#节点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5条性质"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">5条性质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#树的结构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">树的结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入"><span class="post-toc-number">3.</span> <span class="post-toc-text">插入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5种情况"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">5种情况</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形1：N就是根节点。"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">情形1：N就是根节点。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形2：P为黑色。"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">情形2：P为黑色。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形3：P为红色，B为红色。"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">情形3：P为红色，B为红色。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">情形4：P为红色，B为黑色（或者缺少，即为叶子节点，合并讨论）且N是P的右子节点。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">情形5：P为红色，B为黑色（同情形4），且N是P的左子节点。</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除"><span class="post-toc-number">4.</span> <span class="post-toc-text">删除</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除节点的三种情况"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">删除节点的三种情况</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#“双黑”修正"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">“双黑”修正</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#“双黑”修正的思路"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">“双黑”修正的思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形1：N为树的根"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">情形1：N为树的根</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形2：B为红色"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">情形2：B为红色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形3：P、S、-mathrm-B-L-、-mathrm-B-R-均为黑色"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">情形3：P、S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形4：P为红色，S、-mathrm-B-L-、-mathrm-B-R-均为黑色"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">情形4：P为红色，S、$\mathrm{B_L}$、$\mathrm{B_R}$均为黑色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形5：B为黑色，-mathrm-B-L-为红色、-mathrm-B-R-为黑色"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">情形5：B为黑色，$\mathrm{B_L}$为红色、$\mathrm{B_R}$为黑色</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#情形6：S为黑色、-mathrm-B-R-为黑色"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">情形6：S为黑色、$\mathrm{B_R}$为黑色</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#附注"><span class="post-toc-number">5.</span> <span class="post-toc-text">附注</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考："><span class="post-toc-number">6.</span> <span class="post-toc-text">参考：</span></a></li></ol>
+  </nav>
+</aside>
+<section class="article">
   <h2 class="title">红黑树</h2>
   <p class="sub">Apr 7, 2019</p>
   <article class="content">
@@ -452,7 +459,9 @@ if (t == root) {
 </script>
 <script type="text/javascript" async src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-</div>
+
+
+    </div>
     <footer id="footer" class="f-cf">
   xlyanscor@outlook.com
   
@@ -465,6 +474,7 @@ if (t == root) {
   <span class="copyright">All rights reserved @Anscor</span>
   <script src="/jquery-3.3.1.min.js"></script>
   <script src="/plugins/prettify/prettify.js"></script>
+  <script src="/toc.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
       $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
